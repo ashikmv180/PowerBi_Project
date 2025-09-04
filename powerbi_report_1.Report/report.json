@@ -25,7 +25,7 @@
   "sections": [
     {
       "config": "{}",
-      "displayName": "city and category",
+      "displayName": "city and category and subcategory",
       "displayOption": 1,
       "filters": "[{\"name\":\"ffea3743003edc732ea9\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Account\"}},\"Property\":\"Account_ID\"}},\"type\":\"Advanced\",\"howCreated\":1}]",
       "height": 720.00,
