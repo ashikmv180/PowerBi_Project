@@ -1,0 +1,60 @@
+table Display
+	lineageTag: 0785c417-00a8-4de1-93e1-f892c9395ac5
+
+	column Column1
+		dataType: string
+		lineageTag: 513fa521-fdc2-43c3-83fb-4fd836c1e752
+		summarizeBy: none
+		sourceColumn: Column1
+
+		annotation SummarizationSetBy = Automatic
+
+	column Column2
+		dataType: string
+		lineageTag: 7a782e7b-40ad-449b-be31-a1796701b10e
+		summarizeBy: none
+		sourceColumn: Column2
+
+		annotation SummarizationSetBy = Automatic
+
+	column Column3
+		dataType: int64
+		formatString: 0
+		lineageTag: 0a783e35-d2cd-4454-ac66-8a7516dd38b3
+		summarizeBy: sum
+		sourceColumn: Column3
+
+		annotation SummarizationSetBy = Automatic
+
+	column Column4
+		dataType: int64
+		formatString: 0
+		lineageTag: b2927f7f-c4d2-4aaf-9e58-10e3703e7738
+		summarizeBy: sum
+		sourceColumn: Column4
+
+		annotation SummarizationSetBy = Automatic
+
+	column Column5
+		dataType: int64
+		formatString: 0
+		lineageTag: 46d393f0-df46-498c-8466-bff5aefc786d
+		summarizeBy: sum
+		sourceColumn: Column5
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Display = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Ashik\Downloads\P&L Data.xlsx"), null, true),
+				    Display_Sheet = Source{[Item="Display",Kind="Sheet"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(Display_Sheet,{{"Column1", type text}, {"Column2", type text}, {"Column3", Int64.Type}, {"Column4", Int64.Type}, {"Column5", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

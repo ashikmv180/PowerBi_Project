@@ -1,0 +1,48 @@
+table 'Combine Split'
+	lineageTag: 421c372b-2c89-4b1c-b566-f71b5409d40a
+
+	column Name
+		dataType: string
+		lineageTag: 002296ca-6c69-4fd9-a3ba-71a110649139
+		summarizeBy: none
+		sourceColumn: Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Item
+		dataType: string
+		lineageTag: be103694-a4f0-41b7-b83d-2d9fd0f5ce58
+		summarizeBy: none
+		sourceColumn: Item
+
+		annotation SummarizationSetBy = Automatic
+
+	column Kind
+		dataType: string
+		lineageTag: 2da1612b-b7af-4ca9-9558-26a4898f112b
+		summarizeBy: none
+		sourceColumn: Kind
+
+		annotation SummarizationSetBy = Automatic
+
+	column Hidden
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 8a870409-8b71-495c-9378-2cff08bd2adf
+		summarizeBy: none
+		sourceColumn: Hidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Combine Split' = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Ashik\Downloads\PivotData.xlsx"), null, true)
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

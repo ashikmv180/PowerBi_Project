@@ -1,0 +1,126 @@
+table Sales
+	lineageTag: 567d23ac-65ef-4e67-92b0-88c84a0408da
+
+	column 'Order No'
+		dataType: int64
+		formatString: 0
+		lineageTag: 1f11e971-4cdc-4190-81f5-b0fa3e2b5dfc
+		summarizeBy: sum
+		sourceColumn: Order No
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Item ID'
+		dataType: int64
+		formatString: 0
+		lineageTag: 1c24cf2b-c7f1-410a-89d4-45de47ff116d
+		summarizeBy: none
+		sourceColumn: Item ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sales Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 1ba7b17b-e279-4764-add9-4906f4996529
+		summarizeBy: none
+		sourceColumn: Sales Date
+
+		variation Variation
+			isDefault
+			relationship: 2c0888d7-5b75-4b68-96df-2ead480c9eb2
+			defaultHierarchy: LocalDateTable_35bea925-7316-4f26-9485-94a992d5fafe.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Deilvery Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: a01377e0-bc3a-43e6-9cdd-56c95958011e
+		summarizeBy: none
+		sourceColumn: Deilvery Date
+
+		variation Variation
+			isDefault
+			relationship: 02216dca-15aa-495a-a982-33ed1608aecc
+			defaultHierarchy: LocalDateTable_e973552a-fe46-40ce-a922-244af87b3de6.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Customer Id'
+		dataType: int64
+		formatString: 0
+		lineageTag: ac18991a-3a89-4b66-af02-8ab158daec87
+		summarizeBy: none
+		sourceColumn: Customer Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'City Id'
+		dataType: int64
+		formatString: 0
+		lineageTag: f78e49c4-3f1c-4cc8-be0e-be706ddbf281
+		summarizeBy: none
+		sourceColumn: City Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column Qty
+		dataType: int64
+		formatString: 0
+		lineageTag: 133464d7-c1d7-4336-9d83-8c400c48f85b
+		summarizeBy: sum
+		sourceColumn: Qty
+
+		annotation SummarizationSetBy = Automatic
+
+	column Price
+		dataType: int64
+		formatString: 0
+		lineageTag: 3ddc9752-dad7-42b5-8283-34b1bc4be6cc
+		summarizeBy: sum
+		sourceColumn: Price
+
+		annotation SummarizationSetBy = Automatic
+
+	column cost
+		dataType: int64
+		formatString: 0
+		lineageTag: edc47e55-dc82-4196-b0ac-0791c749cd10
+		summarizeBy: sum
+		sourceColumn: cost
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Discount Percent'
+		dataType: int64
+		formatString: 0
+		lineageTag: 4f8c2827-1bdb-480a-8f2d-19cce03691ff
+		summarizeBy: sum
+		sourceColumn: Discount Percent
+
+		annotation SummarizationSetBy = Automatic
+
+	column Column = related('Geography'[State])
+		lineageTag: e4810f0f-def5-4ab6-9fcb-645e16c5972f
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Sales = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Ashik\Downloads\Sales Data Used in Video (1).xlsx"), null, true),
+				    Sales_Sheet = Source{[Item="Sales",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Sales_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Order No", Int64.Type}, {"Item ID", Int64.Type}, {"Sales Date", type date}, {"Deilvery Date", type date}, {"Customer Id", Int64.Type}, {"City Id", Int64.Type}, {"Qty", Int64.Type}, {"Price", Int64.Type}, {"cost", Int64.Type}, {"Discount Percent", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

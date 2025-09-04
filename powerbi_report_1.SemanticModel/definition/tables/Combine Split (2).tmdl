@@ -1,0 +1,25 @@
+table 'Combine Split (2)'
+	lineageTag: 95534cde-2897-4646-8167-01547db4bdcc
+
+	column Column1
+		dataType: string
+		lineageTag: 39f802e3-1052-4288-ad13-66eedfe29447
+		summarizeBy: none
+		sourceColumn: Column1
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Combine Split (2)' = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Ashik\Downloads\PivotData.xlsx"), null, true),
+				    #"Combine Split_Sheet" = Source{[Item="Combine Split",Kind="Sheet"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(#"Combine Split_Sheet",{{"Column1", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

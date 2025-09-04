@@ -1,0 +1,49 @@
+table Account
+	lineageTag: c5691c90-132f-4518-bcc6-ed045306986f
+
+	column Account_ID
+		dataType: int64
+		formatString: 0
+		lineageTag: 93a5a6e1-8c01-473b-93c4-2a4f31646f57
+		summarizeBy: none
+		sourceColumn: Account_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Account
+		dataType: string
+		lineageTag: 2067c5e0-35f2-49a8-b0ed-157c995bf768
+		summarizeBy: none
+		sourceColumn: Account
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'P&L Category'
+		dataType: string
+		lineageTag: 5838ffb9-0593-4dee-bca6-6e444fdaa620
+		summarizeBy: none
+		sourceColumn: P&L Category
+
+		annotation SummarizationSetBy = Automatic
+
+	column Column = 'Account'[Account] & " " & 'Account'[P&L Category]
+		lineageTag: 347500f9-7de1-45fe-8170-ed28f2b5cca4
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Account = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Ashik\Downloads\P&L Data.xlsx"), null, true),
+				    Account_Sheet = Source{[Item="Account",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Account_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Account_ID", Int64.Type}, {"Account", type text}, {"P&L Category", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,65 @@
+relationship 2c0888d7-5b75-4b68-96df-2ead480c9eb2
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Sales.'Sales Date'
+	toColumn: LocalDateTable_35bea925-7316-4f26-9485-94a992d5fafe.Date
+
+relationship 02216dca-15aa-495a-a982-33ed1608aecc
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Sales.'Deilvery Date'
+	toColumn: LocalDateTable_e973552a-fe46-40ce-a922-244af87b3de6.Date
+
+relationship AutoDetected_b08d0444-da49-4793-8287-0c2f2be0cdf7
+	fromColumn: Sales.'Customer Id'
+	toColumn: Customer.'Customer Id'
+
+relationship AutoDetected_a9691768-702f-48d9-a889-b756df7325a9
+	fromColumn: Sales.'City Id'
+	toColumn: Geography.'City Id'
+
+relationship AutoDetected_49049188-51b3-41db-9f6d-d3f83d47349f
+	fromColumn: Sales.'Item ID'
+	toColumn: Item.'Item Id'
+
+relationship 0e136be2-3e06-4edb-9818-27844f9a462f
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Datetime.Datetime
+	toColumn: LocalDateTable_a220f7fb-6064-4157-a84a-7eb3cdd50f15.Date
+
+relationship 3dcd8563-2aab-4850-91d3-9d4ee1551f79
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Datetime (2)'.Datetime
+	toColumn: LocalDateTable_93124b78-1ef0-4855-b69a-419d1edf695b.Date
+
+relationship 0a2fd865-0069-4887-8fa9-cbb0575ba6dc
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Unpivot.Month
+	toColumn: LocalDateTable_8aa0070c-7949-4f73-8113-9fd1adc96db5.Date
+
+relationship 0d194697-c6d2-2012-3bac-b46bae3e0606
+	fromColumn: 'Combine Split'.Hidden
+	toColumn: Details.Name
+
+relationship 2c9ca9eb-aefd-d82b-262d-d4191c640780
+	isActive: false
+	fromColumn: Customer.City
+	toColumn: Geography.City
+
+relationship 03385be8-9cb7-309a-a855-c5d082a8423f
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: Account.Account_ID
+	toColumn: 'PL Account'.Account_ID
+
+relationship 917d6784-f9ce-d816-f9ad-ad6115cbc903
+	fromColumn: GL.Account_ID
+	toColumn: 'PL Account'.Account_ID
+
+relationship b09ff519-4a12-55d0-fecd-38e137c951a8
+	isActive: false
+	fromColumn: GL.Account
+	toColumn: Account.Account
+
+relationship 558b790f-b008-e192-f5b2-38dac26d4e80
+	fromColumn: Customer.Age
+	toColumn: Account.Account_ID
+

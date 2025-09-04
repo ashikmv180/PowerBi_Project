@@ -1,0 +1,30 @@
+table Datetime
+	lineageTag: d968c075-e5f8-4de5-bafa-268f50e29fa9
+
+	column Datetime
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 615e6f0c-160b-433a-9f67-8a8c0a3eb6fb
+		summarizeBy: none
+		sourceColumn: Datetime
+
+		variation Variation
+			isDefault
+			relationship: 0e136be2-3e06-4edb-9818-27844f9a462f
+			defaultHierarchy: LocalDateTable_a220f7fb-6064-4157-a84a-7eb3cdd50f15.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Datetime = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Ashik\Downloads\PivotData.xlsx"), null, true),
+				    Datetime_Sheet = Source{[Item="Datetime",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Datetime_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Datetime", type datetime}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

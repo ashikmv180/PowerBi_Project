@@ -1,0 +1,41 @@
+table Geography
+	lineageTag: 3689bf39-3f78-4318-9523-2ce94647985c
+
+	column 'City Id'
+		dataType: int64
+		formatString: 0
+		lineageTag: f067bbc1-1bb9-496d-bc00-1c2a4345cf88
+		summarizeBy: none
+		sourceColumn: City Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column City
+		dataType: string
+		lineageTag: 96a7cacd-a692-4dfd-ae0d-960f2cc5f2bb
+		summarizeBy: none
+		sourceColumn: City
+
+		annotation SummarizationSetBy = Automatic
+
+	column State
+		dataType: string
+		lineageTag: 341b6eae-5efd-4c4f-a156-109494657f3f
+		summarizeBy: none
+		sourceColumn: State
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Geography = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Ashik\Downloads\Sales Data Used in Video (1).xlsx"), null, true),
+				    Geography_Sheet = Source{[Item="Geography",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Geography_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"City Id", Int64.Type}, {"City", type text}, {"State#(tab)#(tab)", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

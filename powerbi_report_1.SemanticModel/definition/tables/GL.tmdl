@@ -1,0 +1,53 @@
+table GL
+	lineageTag: 5e4308e5-6617-4e72-b903-367cf47f7241
+
+	column Account_ID
+		dataType: int64
+		formatString: 0
+		lineageTag: 98953f1a-6acc-430b-80fa-cc39d8103725
+		summarizeBy: none
+		sourceColumn: Account_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Account
+		dataType: string
+		lineageTag: 103fb5c8-17ea-45aa-a78d-355a9065bbfc
+		summarizeBy: none
+		sourceColumn: Account
+
+		annotation SummarizationSetBy = Automatic
+
+	column Amount
+		dataType: int64
+		formatString: 0
+		lineageTag: 40520d68-3bee-43c0-adef-74daaeaf3949
+		summarizeBy: sum
+		sourceColumn: Amount
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: 689d6336-99c5-41cb-b66c-1c02a2965da0
+		summarizeBy: sum
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+	partition GL = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Ashik\Downloads\P&L Data.xlsx"), null, true),
+				    GL_Sheet = Source{[Item="GL",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(GL_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Account_ID", Int64.Type}, {"Account", type text}, {"Amount", Int64.Type}, {"Year", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

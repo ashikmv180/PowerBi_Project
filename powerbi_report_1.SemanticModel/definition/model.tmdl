@@ -1,0 +1,42 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["Customer","Geography","Item","Sales","Combine Split","Datetime","Details","Text Op","Account","GL","PL Account","Display","Data Dup","Combine Split (2)","Datetime (2)","Fill","Unpivot"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBIDesktopVersion = 2.142.928.0 (25.04)+de52df9f0bb74ad93a80d89c52d63fe6d07e0e1b
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table Customer
+ref table Geography
+ref table Item
+ref table Sales
+ref table DateTableTemplate_0e699292-8eea-47b0-a049-7290901364d4
+ref table LocalDateTable_35bea925-7316-4f26-9485-94a992d5fafe
+ref table LocalDateTable_e973552a-fe46-40ce-a922-244af87b3de6
+ref table 'Combine Split'
+ref table Datetime
+ref table LocalDateTable_a220f7fb-6064-4157-a84a-7eb3cdd50f15
+ref table Details
+ref table 'Text Op'
+ref table Account
+ref table GL
+ref table 'PL Account'
+ref table Display
+ref table 'Data Dup'
+ref table 'Combine Split (2)'
+ref table 'Datetime (2)'
+ref table LocalDateTable_93124b78-1ef0-4855-b69a-419d1edf695b
+ref table Fill
+ref table Unpivot
+ref table LocalDateTable_8aa0070c-7949-4f73-8113-9fd1adc96db5
+
+ref cultureInfo en-US
+

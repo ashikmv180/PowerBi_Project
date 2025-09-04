@@ -1,0 +1,79 @@
+table 'PL Account'
+	lineageTag: d728d089-b545-4e93-85e2-70108f52e918
+
+	column Account_ID
+		dataType: int64
+		formatString: 0
+		lineageTag: 2ac3f7a2-cbe1-428a-a219-9eae945d4ef2
+		summarizeBy: none
+		sourceColumn: Account_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'P&L Category'
+		dataType: string
+		lineageTag: a88f2acd-f524-455a-97d6-942ca3e18d92
+		summarizeBy: none
+		sourceColumn: P&L Category
+
+		annotation SummarizationSetBy = Automatic
+
+	column Account
+		dataType: string
+		lineageTag: 88a989e2-3b41-45e4-9fda-e12148c4ab72
+		summarizeBy: none
+		sourceColumn: Account
+
+		annotation SummarizationSetBy = Automatic
+
+	column Order_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 2c1164cd-1da4-452e-b95a-5ff3194433cc
+		summarizeBy: none
+		sourceColumn: Order_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column Cat_order
+		dataType: int64
+		formatString: 0
+		lineageTag: 3332f872-6783-47f9-b7e6-e83347d38246
+		summarizeBy: none
+		sourceColumn: Cat_order
+
+		annotation SummarizationSetBy = Automatic
+
+	column Display
+		dataType: int64
+		formatString: 0
+		lineageTag: bf4346a1-6a48-4577-8e5d-004406f46311
+		summarizeBy: none
+		sourceColumn: Display
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Disp Col'
+		dataType: int64
+		formatString: 0
+		lineageTag: e850a12c-a20e-4efb-bc4f-9a99efce6a53
+		summarizeBy: none
+		sourceColumn: Disp Col
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'PL Account' = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Ashik\Downloads\P&L Data.xlsx"), null, true),
+				    #"PL Account_Sheet" = Source{[Item="PL Account",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(#"PL Account_Sheet", [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Account_ID", Int64.Type}, {"P&L Category", type text}, {"Account", type text}, {"Order_id", Int64.Type}, {"Cat_order", Int64.Type}, {"Display", Int64.Type}, {"Disp Col", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

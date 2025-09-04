@@ -1,0 +1,42 @@
+table Details
+	lineageTag: 23968876-df87-41c0-ac79-d2460cee2833
+
+	column ID
+		dataType: int64
+		formatString: 0
+		lineageTag: e0f6ffa9-cb65-4587-9b47-3d4ff37aea6a
+		summarizeBy: none
+		sourceColumn: ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Cat ID'
+		dataType: int64
+		formatString: 0
+		lineageTag: f303a511-a067-4bca-bb81-43e81e7ff2be
+		summarizeBy: none
+		sourceColumn: Cat ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Name
+		dataType: string
+		lineageTag: 828c0c8d-4f64-41e4-a041-90136b58aa63
+		summarizeBy: none
+		sourceColumn: Name
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Details = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Ashik\Downloads\PivotData.xlsx"), null, true),
+				    Details_Sheet = Source{[Item="Details",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Details_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"ID", Int64.Type}, {"Cat ID", Int64.Type}, {"Name", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

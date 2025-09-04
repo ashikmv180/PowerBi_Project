@@ -1,0 +1,67 @@
+table Customer
+	lineageTag: 43d20348-57fc-4cf3-8d82-5993cfc1f98e
+
+	column 'Customer Id'
+		dataType: int64
+		formatString: 0
+		lineageTag: 60bc278f-4ec9-431e-804f-f690bd077328
+		summarizeBy: none
+		sourceColumn: Customer Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column Age
+		dataType: int64
+		formatString: 0
+		lineageTag: c6522ea9-c950-452b-94e8-3c278758dacb
+		summarizeBy: none
+		sourceColumn: Age
+
+		annotation SummarizationSetBy = Automatic
+
+	column City
+		dataType: string
+		lineageTag: 032d7935-b6ee-433b-b40d-d189e737945b
+		summarizeBy: none
+		sourceColumn: City
+
+		annotation SummarizationSetBy = Automatic
+
+	column State
+		dataType: string
+		lineageTag: 0b2d062c-61a5-4cb5-88f2-86ede2541566
+		summarizeBy: none
+		sourceColumn: State
+
+		annotation SummarizationSetBy = Automatic
+
+	column Name
+		dataType: string
+		lineageTag: e9444243-0b71-46e5-b2cf-453a0e6cc270
+		summarizeBy: none
+		sourceColumn: Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column age_breakdown = ```
+			if('Customer'[Age]>=40, "40+", 
+			if('Customer'[Age]<40, "<40"))
+			```
+		lineageTag: cc568910-2b10-465a-9e72-72189f953578
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Customer = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Ashik\Downloads\Sales Data Used in Video (1).xlsx"), null, true),
+				    Customer_Sheet = Source{[Item="Customer",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Customer_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Customer Id", Int64.Type}, {"Age", Int64.Type}, {"City", type text}, {"State", type text}, {"Name", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,44 @@
+table Fill
+	lineageTag: 90fc13d2-6df8-4bc7-9780-670f0a556c15
+
+	column Name
+		dataType: string
+		lineageTag: aad7237e-eba5-4cd1-9a3e-0a3c7f98b59f
+		summarizeBy: none
+		sourceColumn: Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Attribute
+		dataType: string
+		lineageTag: 2bb31bc9-62cf-4a60-806d-23949c82a09f
+		summarizeBy: none
+		sourceColumn: Attribute
+
+		annotation SummarizationSetBy = Automatic
+
+	column Value
+		dataType: int64
+		formatString: 0
+		lineageTag: 8e48f5a0-413b-40dc-a640-e9ce281eae48
+		summarizeBy: sum
+		sourceColumn: Value
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Fill = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Ashik\Downloads\PivotData.xlsx"), null, true),
+				    Fill_Sheet = Source{[Item="Fill",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Fill_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Name", type text}, {"Maths", Int64.Type}, {"Physics", Int64.Type}, {"Chemistry", Int64.Type}, {"Computers", Int64.Type}, {"English", Int64.Type}}),
+				    #"Unpivoted Columns" = Table.UnpivotOtherColumns(#"Changed Type", {"Name"}, "Attribute", "Value")
+				in
+				    #"Unpivoted Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

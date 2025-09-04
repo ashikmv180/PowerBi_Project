@@ -1,0 +1,91 @@
+table Item
+	lineageTag: bfa3028d-7146-45b3-92ca-0d22891b8a64
+
+	column 'Item Id'
+		dataType: int64
+		formatString: 0
+		lineageTag: 516c80f1-8767-448d-93a2-83cc32e6eb7f
+		summarizeBy: none
+		sourceColumn: Item Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column Name
+		dataType: string
+		lineageTag: c97a65e7-4741-4caa-9431-7dd63327b380
+		summarizeBy: none
+		sourceColumn: Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Brand Id'
+		dataType: int64
+		formatString: 0
+		lineageTag: 4ed89235-f494-46d8-8080-9dd2de278de1
+		summarizeBy: none
+		sourceColumn: Brand Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Category Id'
+		dataType: int64
+		formatString: 0
+		lineageTag: 72d3a32d-1cf9-4a92-98d9-d363f6f714a8
+		summarizeBy: none
+		sourceColumn: Category Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sub Category Id'
+		dataType: int64
+		formatString: 0
+		lineageTag: 02fc1f94-91da-4225-9806-9fb89b61b619
+		summarizeBy: none
+		sourceColumn: Sub Category Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column Brand
+		dataType: string
+		lineageTag: f1715d85-82cf-4ec6-a78c-b325d7c128d4
+		summarizeBy: none
+		sourceColumn: Brand
+
+		annotation SummarizationSetBy = Automatic
+
+	column Category
+		dataType: string
+		lineageTag: f93e4bce-ec38-469d-a936-851e074b2778
+		summarizeBy: none
+		sourceColumn: Category
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sub Category'
+		dataType: string
+		lineageTag: e90f8720-44ef-4f43-9903-5a23e783b1e1
+		summarizeBy: none
+		sourceColumn: Sub Category
+
+		annotation SummarizationSetBy = Automatic
+
+	column Column = SUM(Sales[Price])
+		formatString: 0
+		lineageTag: 54dc3d4a-9e39-4130-a105-1c6c2a2ee481
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Item = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Ashik\Downloads\Sales Data Used in Video (1).xlsx"), null, true),
+				    Item_Sheet = Source{[Item="Item",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Item_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Item Id", Int64.Type}, {"Name", type text}, {"Brand Id", Int64.Type}, {"Category Id", Int64.Type}, {"Sub Category Id", Int64.Type}, {"Brand", type text}, {"Category", type text}, {"Sub Category", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

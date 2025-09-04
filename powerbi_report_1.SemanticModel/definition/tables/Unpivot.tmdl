@@ -1,0 +1,55 @@
+table Unpivot
+	lineageTag: 44ef4c26-d86c-414c-9e29-38f19c920bdd
+
+	column Month
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: de51cb48-37e2-4619-a598-a5ff80e471f1
+		summarizeBy: none
+		sourceColumn: Month
+
+		variation Variation
+			isDefault
+			relationship: 0a2fd865-0069-4887-8fa9-cbb0575ba6dc
+			defaultHierarchy: LocalDateTable_8aa0070c-7949-4f73-8113-9fd1adc96db5.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Sales
+		dataType: double
+		lineageTag: fcd08ec7-180f-4a47-aa4c-96873ebbecc3
+		summarizeBy: sum
+		sourceColumn: Sales
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Margin
+		dataType: double
+		lineageTag: ad915f75-c594-438a-be82-f17e2aa71084
+		summarizeBy: sum
+		sourceColumn: Margin
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Unpivot = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Ashik\Downloads\PivotData.xlsx"), null, true),
+				    Unpivot_Sheet = Source{[Item="Unpivot",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Unpivot_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Month", type date}, {"Measure", type text}, {"Value", type number}}),
+				    #"Pivoted Column" = Table.Pivot(#"Changed Type", List.Distinct(#"Changed Type"[Measure]), "Measure", "Value", List.Sum)
+				in
+				    #"Pivoted Column"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
