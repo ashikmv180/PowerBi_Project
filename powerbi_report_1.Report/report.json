@@ -1,6 +1,13 @@
 {
   "config": "{\"version\":\"5.59\",\"themeCollection\":{\"baseTheme\":{\"name\":\"CY24SU10\",\"version\":\"5.63\",\"type\":2},\"customTheme\":{\"name\":\"AccessibleCityPark\",\"version\":\"5.63\",\"type\":2}},\"activeSectionIndex\":0,\"defaultDrillFilterOtherVisuals\":true,\"linguisticSchemaSyncVersion\":2,\"settings\":{\"useNewFilterPaneExperience\":true,\"allowChangeFilterTypes\":true,\"useStylableVisualContainerHeader\":true,\"queryLimitOption\":6,\"exportDataMode\":1,\"useDefaultAggregateDisplayName\":true,\"useEnhancedTooltips\":true,\"filterPaneHiddenInEditMode\":false},\"objects\":{\"section\":[{\"properties\":{\"verticalAlignment\":{\"expr\":{\"Literal\":{\"Value\":\"'Top'\"}}}}}],\"outspacePane\":[{\"properties\":{\"expanded\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]}}",
   "layoutOptimization": 0,
+  "pods": [
+    {
+      "boundSection": "59f64f20da51a242d287",
+      "config": "{}",
+      "name": "a18e80ab967daf98cbbc"
+    }
+  ],
   "resourcePackages": [
     {
       "resourcePackage": {
@@ -41,21 +48,21 @@
           "z": 0.00
         },
         {
-          "config": "{\"name\":\"6e5b3260945ce0833a99\",\"layouts\":[{\"id\":0,\"position\":{\"x\":665.6402199528673,\"y\":181.99528672427337,\"z\":2000,\"width\":352.93008641005497,\"height\":297.6276512175962,\"tabOrder\":2000}}],\"singleVisual\":{\"visualType\":\"clusteredColumnChart\",\"projections\":{\"Category\":[{\"queryRef\":\"Item.Category\",\"active\":true}],\"Y\":[{\"queryRef\":\"CountNonNull(Item.Item Id)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"i\",\"Entity\":\"Item\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"i\"}},\"Property\":\"Category\"},\"Name\":\"Item.Category\",\"NativeReferenceName\":\"Category\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"i\"}},\"Property\":\"Item Id\"}},\"Function\":5},\"Name\":\"CountNonNull(Item.Item Id)\",\"NativeReferenceName\":\"Item Id\"}],\"OrderBy\":[{\"Direction\":1,\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"i\"}},\"Property\":\"Category\"}}}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"categoryAxis\":[{\"properties\":{\"bold\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}},\"underline\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}],\"labels\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}],\"valueAxis\":[{\"properties\":{\"gridlineShow\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]}}}",
+          "config": "{\"name\":\"6e5b3260945ce0833a99\",\"layouts\":[{\"id\":0,\"position\":{\"x\":720,\"y\":190.7462686567164,\"z\":2000,\"width\":352.8358208955224,\"height\":298.2089552238806,\"tabOrder\":2000}}],\"singleVisual\":{\"visualType\":\"clusteredColumnChart\",\"projections\":{\"Category\":[{\"queryRef\":\"Item.Category\",\"active\":true}],\"Y\":[{\"queryRef\":\"CountNonNull(Item.Item Id)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"i\",\"Entity\":\"Item\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"i\"}},\"Property\":\"Category\"},\"Name\":\"Item.Category\",\"NativeReferenceName\":\"Category\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"i\"}},\"Property\":\"Item Id\"}},\"Function\":5},\"Name\":\"CountNonNull(Item.Item Id)\",\"NativeReferenceName\":\"Item Id\"}],\"OrderBy\":[{\"Direction\":1,\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"i\"}},\"Property\":\"Category\"}}}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"categoryAxis\":[{\"properties\":{\"bold\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}},\"underline\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}},\"titleText\":{\"expr\":{\"Literal\":{\"Value\":\"'Category_wise_Updated'\"}}}}}],\"labels\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}],\"valueAxis\":[{\"properties\":{\"gridlineShow\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]}}}",
           "filters": "[]",
-          "height": 297.63,
-          "width": 352.93,
-          "x": 665.64,
-          "y": 182.00,
+          "height": 298.21,
+          "width": 352.84,
+          "x": 720.00,
+          "y": 190.75,
           "z": 2000.00
         },
         {
-          "config": "{\"name\":\"d8321d935fb7fd2ebefa\",\"layouts\":[{\"id\":0,\"position\":{\"x\":80.43990573448546,\"y\":181.99528672427337,\"z\":1000,\"width\":560.0628436763551,\"height\":278.5231736056559,\"tabOrder\":1000}}],\"singleVisual\":{\"visualType\":\"clusteredColumnChart\",\"projections\":{\"Category\":[{\"queryRef\":\"Geography.State\",\"active\":true}],\"Y\":[{\"queryRef\":\"Count(Geography.City)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"g\",\"Entity\":\"Geography\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"g\"}},\"Property\":\"State\"},\"Name\":\"Geography.State\",\"NativeReferenceName\":\"State\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"g\"}},\"Property\":\"City\"}},\"Function\":2},\"Name\":\"Count(Geography.City)\",\"NativeReferenceName\":\"Count of City\"}],\"OrderBy\":[{\"Direction\":1,\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"g\"}},\"Property\":\"State\"}}}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"valueAxis\":[{\"properties\":{\"gridlineShow\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]}}}",
+          "config": "{\"name\":\"d8321d935fb7fd2ebefa\",\"layouts\":[{\"id\":0,\"position\":{\"x\":105.67164179104478,\"y\":190.7462686567164,\"z\":1000,\"width\":559.7014925373135,\"height\":278.5074626865672,\"tabOrder\":1000}}],\"singleVisual\":{\"visualType\":\"clusteredColumnChart\",\"projections\":{\"Category\":[{\"queryRef\":\"Geography.State\",\"active\":true}],\"Y\":[{\"queryRef\":\"Count(Geography.City)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"g\",\"Entity\":\"Geography\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"g\"}},\"Property\":\"State\"},\"Name\":\"Geography.State\",\"NativeReferenceName\":\"State\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"g\"}},\"Property\":\"City\"}},\"Function\":2},\"Name\":\"Count(Geography.City)\",\"NativeReferenceName\":\"Count of City\"}],\"OrderBy\":[{\"Direction\":1,\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"g\"}},\"Property\":\"State\"}}}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"valueAxis\":[{\"properties\":{\"gridlineShow\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}],\"categoryAxis\":[{\"properties\":{\"titleBold\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"showAxisTitle\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"titleText\":{\"expr\":{\"Literal\":{\"Value\":\"'State by Country'\"}}},\"titleUnderline\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]}}}",
           "filters": "[]",
-          "height": 278.52,
-          "width": 560.06,
-          "x": 80.44,
-          "y": 182.00,
+          "height": 278.51,
+          "width": 559.70,
+          "x": 105.67,
+          "y": 190.75,
           "z": 1000.00
         }
       ],
